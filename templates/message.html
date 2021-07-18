@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Pi Video Surveillance</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    
+    
+      function ref(){
+      $.ajax({
+        url: "/sucess",
+        type: "get",
+        success: function(response) {
+          $("#dataref").html(response);
+        },
+        error: function(xhr) {
+          //Do Something to handle error
+        }
+      });
+  }
+
+  function imref(){
+      $.ajax({
+        url: "/table",
+        type: "GET",
+        success: function(response) {
+          dataxa = $("#imgref").next("img");
+         dataxa.attr('src', response + '?' + new Date().getTime());
+          //console.log(response);
+        },
+        error: function(xhr) {
+          //Do Something to handle error
+        }
+      });
+  }
+  
+      window.onload = setInterval("ref();",1000);
+      window.onload = setInterval("imref();",5000);
+      
+      
+      
+      </script>
+  </head>
+  <body>
+    <h1>Video Surveillance</h1>
+   <div id = "dataref"></div> 
+    <img src="{{ url_for('video_feed') }}">
+    <div id = "imgref"></div>
+    <img src="static/crim_found/crim1.jpg">
+
+  </body>
+</html>
+
