@@ -1,9 +1,17 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Pi Video Surveillance</title>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"> 
+
+    <link href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"> </script> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-    
     
       function ref(){
       $.ajax({
@@ -23,8 +31,7 @@
         url: "/table",
         type: "GET",
         success: function(response) {
-          dataxa = $("#imgref").next("img");
-         dataxa.attr('src', response + '?' + new Date().getTime());
+            $("#imgref").attr('src', response + '?' + new Date().getTime());
           //console.log(response);
         },
         error: function(xhr) {
@@ -32,21 +39,71 @@
         }
       });
   }
-  
       window.onload = setInterval("ref();",1000);
       window.onload = setInterval("imref();",5000);
-      
-      
-      
       </script>
-  </head>
-  <body>
-    <h1>Video Surveillance</h1>
-   <div id = "dataref"></div> 
-    <img src="{{ url_for('video_feed') }}">
-    <div id = "imgref"></div>
-    <img src="static/crim_found/crim1.jpg">
 
-  </body>
+</head> 
+    <title></title>
+    <style>
+
+        .container{
+        
+        border-radius: 30px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        }
+        p{
+            color: whitesmoke;
+        }
+        .stt a:hover{
+            color: #62b6cb !important;
+        }
+        </style>
+ 
+    <body style="background-color: #1B4965;background-image: url('static/Rectangle1.png');background-size: cover;">
+        <div style="height: 100vh; background-image: url('static/Rectangle.png');background-repeat: no-repeat;background-size: cover;background-position-x: 500px;">
+            <div style="display:flex;flex-direction:row;justify-content: space-between">
+            <h4 style="padding: 2%; font-weight: 700; color: #e6d5d5;">Fugitive Detection traffic System</h4>
+            <div style="display:flex;flex-direction:row;padding:2%;">
+                <h5 style="margin-left: 30px;margin-right: 20px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="#">Contact</a> </h5>
+                <h5 style="margin-left: 30px;margin-right: 20px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="#">About Us </a></h5>
+                <h5 style="margin-left: 30px;margin-right: 20px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/logout">Logout</a></h5>
+            </div>
+            </div>
+            <div style="display:flex;flex-direction:row; justify-content: space-evenly;align-items: center;">
+                <div>
+                    <div style="height: 500px;width: 500px;background-color: antiquewhite;border-radius: 20px; overflow:hidden;">
+                        <img src="{{ url_for('video_feed') }}" height="100%" width="100%">
+                    </div>
+                </div>
+
+                <div>
+                    <div style="border-radius: 27px;background-color: #62b6cb;width: 350px; margin: 10px 10px 15px 10px;" class="card ">
+                        <div style="border: 0.5px solid #62b6cb;border-radius: 27px;background-color: #62b6cb;"class="card-body container">
+                            <div style="border: 0.5px solid #ffffff;border-radius: 27px;height:180px;margin: 0px 15px 0px 15px;" class="card ">
+                                <div  style="border: 0.5px solid #e6d5d5;border-radius: 27px;height:400px;width: 255px; margin: 10px 10px 10px 10px; overflow:hidden;"class="card ">
+                                     <img id = "imgref" src="static/crim_found/crim1.jpg" height="100%" width="100%"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border-radius: 27px;background-color: #62b6cb;" class="card">
+                        <div style="border: 0.5px solid #62b6cb;border-radius: 27px;background-color: #62b6cb;"class="card-body container" id = "dataref" >
+                            <h5 style="color: whitesmoke; text-align: center;" class="card-title">Criminals Details</h5>
+                                <p class="card-text">Name:</p>
+                                <p class="card-text">Age:</p>
+                                <p class="card-text">Sex:</p>
+                                <p class="card-text">Height:</p>
+                                <p class="card-text">No of crimes:</p>
+                                <p class="card-text">Types of crime:</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 200px; background-color: #62B6CB;margin-top: 100px;">
+
+            </div>
+        </div>
+    </body>
 </html>
-

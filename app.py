@@ -151,15 +151,27 @@ def table():
 @app.route("/sucess")
 def sucess():
     global criname
-    age=3
+    ag='-'
+    sex='-'
+    hei='-'
+    noc='-'
+    toc='-'
+    fn='-'
     if(criname!='none'):
         age=db.child(criname).get()
         age=age.val()
-        age=list(age.values())[0]
-    return render_template('sucess.html', ag=age,cri=criname)
+        ag=list(age.values())[0]
+        sex=list(age.values())[4]
+        hei=list(age.values())[1]
+        noc=list(age.values())[3]
+        toc=list(age.values())[5]
+        fn=list(age.values())[2]
+    return render_template('sucess.html', ag=ag,cri=fn,se=sex,he=hei,noc=noc,toc=toc)
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
+    global criname
+    criname='none'
     message = ""
     if request.method == "POST":
         email = request.form["uname"]
@@ -175,8 +187,9 @@ def login():
 
 @app.route('/logout', methods=["POST", "GET"])
 def logout():
-    message="You have been logged out"
-    return render_template("login.html", message=message)
+    global criname
+    criname='none'
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()
