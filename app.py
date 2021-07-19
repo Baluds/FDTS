@@ -12,6 +12,7 @@ from kay import config
 firebase = pyrebase.initialize_app(config)
 
 db = firebase.database()
+auth = firebase.auth()
 
 #db.child("criminals").child("crime").push({"name":"Ray"})
 #db.child("Raymond").update({"Age": "49"})
@@ -156,6 +157,27 @@ def sucess():
         age=age.val()
         age=list(age.values())[0]
     return render_template('sucess.html', ag=age,cri=criname)
+
+@app.route('/login', methods=["POST", "GET"])
+def login():
+    message = ""
+    if request.method == "POST":
+        email = request.form["uname"]
+        password = request.form["psw"]
+        try:
+            user = auth.sign_in_with_email_and_password(email, password)
+            user = auth.refresh(user['refreshToken'])
+            user_id = user['idToken']
+            return redirect(url_for('basic'))
+        except:
+            message = "Incorrect Password! Try again"
+    return render_template("login.html", message=message)
+
+@app.route('/logout', methods=["POST", "GET"])
+def logout():
+    message="You have been logged out"
+    return render_template("login.html", message=message)
+
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()
     app.run(debug=True,threaded=True,use_reloader=False)
