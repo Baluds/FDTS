@@ -25,6 +25,7 @@ lock = threading.Lock()
 crim=None
 criname='none'
 from flask import *
+from flask import Markup
 
 app = Flask(__name__)
 
@@ -193,7 +194,16 @@ def logout():
 
 @app.route('/forgot', methods=["POST", "GET"])
 def forgot():
-    return render_template("forgot.html")
+    passmsg = Markup('')
+    if request.method == "POST":
+        email = request.form["email"]
+        try:
+            auth.send_password_reset_email(email)
+            passmsg=Markup('<div style="color: #008140;"> Password reset link has been sent </div>')  
+        except Exception as e:
+            passmsg=Markup('<div style="color: red;"> We couldn’t find an account with that e-mail, Try Again </div>')
+           # print(e)
+    return render_template("forgot.html",passmsg=passmsg)
 
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()

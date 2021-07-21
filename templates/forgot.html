@@ -114,11 +114,11 @@
                       <div class="container">
                       <p class="p"><strong> Forgot Password?</strong></p>
                       <p>Enter the email associated with your account<br>to receive the password reset link.</p>
-                      <form action="">
+                      <form action="/forgot" method="POST">
                           
-                          <input class="txt" type="text" placeholder="Enter email address" name="uname" required>
+                          <input class="txt" type="text" placeholder="Enter email address" name="email" required>
                           <br>
-                          
+                         {{ passmsg }} 
                           <button>Send</button>
                       </form>
                   </div>
