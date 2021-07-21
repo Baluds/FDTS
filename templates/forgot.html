@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+        <link href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"rel="stylesheet"> 
+        <script src= "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"> </script>
+        <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"> </script> 
+    </head>
+    <title></title>
+    <style>
+        *{
+            font-family: 'Montserrat', sans-serif;
+        }
+        body{
+            margin-top: 8%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #62B6CB;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        img{
+            margin-right: 50px;
+            width: 500px;
+            display: inline-flex;
+        }
+
+        .img{
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card{
+            display: inline-flex;
+            background-color: #62B6CB;
+            border-top: white;
+            border-right: white;
+            border-left: white;
+            border-bottom: white; 
+        }
+
+        .container{
+            background-color:#62B6CB ;
+        }
+        
+        .p{
+            color: #1B4965;
+            display: block;
+            font-size: 96px;
+            width: 600px;
+            line-height: 100px;
+        }
+        p{
+            color: #1B4965;
+        }
+        ::placeholder{
+            color:#bad7df ;
+            font-weight: bold;
+            
+        }
+        input{
+            background-color: #62B6CB;
+            border-top: white;
+            border-left: white;
+            border-right: white;
+            
+            border-bottom: 2px solid #bad7df;
+            width: 350px;
+            margin-top: 10px;
+            color: white;
+            outline: none;
+            
+        }
+        input:focus,input:active{
+            border-color: transparent;
+        }
+        
+        button{
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.415);
+            border-radius: 50px;
+            width: 170px;
+            font-size: 20px;
+            color: #62B6CB;
+            background-color: #1B4965;
+            border:none;
+            height: 50px;
+        }
+        button:focus
+        {
+            outline: none;
+
+        }
+        button:active{
+            color: #62B6CB;
+            background-color: #235d81;
+        }
+    </style>
+    <body>
+        
+            <div class="img">
+                <span><img width="100%" height="100%" src="static\person.png" alt=""></span> 
+            
+                <div class="entry col-sm-4">
+                    <div class="card">
+                      <div class="container">
+                      <p class="p"><strong> Forgot Password?</strong></p>
+                      <p>Enter the email associated with your account<br>to receive the password reset link.</p>
+                      <form action="">
+                          
+                          <input class="txt" type="text" placeholder="Enter email address" name="uname" required>
+                          <br>
+                          
+                          <button>Send</button>
+                      </form>
+                  </div>
+                    </div>
+                    
+                    
+      
+                  </div>
+                </div>
+                 
+            
+    </body>
+</html>

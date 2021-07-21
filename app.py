@@ -191,6 +191,10 @@ def logout():
     criname='none'
     return redirect(url_for('login'))
 
+@app.route('/forgot', methods=["POST", "GET"])
+def forgot():
+    return render_template("forgot.html")
+
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()
     app.run(debug=True,threaded=True,use_reloader=False)
