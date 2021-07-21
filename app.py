@@ -173,7 +173,7 @@ def sucess():
 def login():
     global criname
     criname='none'
-    message = ""
+    message = Markup('')
     if request.method == "POST":
         email = request.form["uname"]
         password = request.form["psw"]
@@ -182,8 +182,8 @@ def login():
             user = auth.refresh(user['refreshToken'])
             user_id = user['idToken']
             return redirect(url_for('basic'))
-        except:
-            message = "Incorrect Password! Try again"
+        except: 
+            message = Markup('<div style="color: red; margin-top: 5px;"> Incorrect Password! Try again </div>')
     return render_template("login.html", message=message)
 
 @app.route('/logout', methods=["POST", "GET"])
