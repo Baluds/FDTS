@@ -110,7 +110,7 @@ def rfa():
             with lock:
                 if(count==1):
                     crim=frame.copy()
-                    cv2.imwrite('static/crim_found/crim1'+'.jpg', crim)
+                    cv2.imwrite('static/crim_found/'+name+'.jpg', crim)
                     criname=name
                 #count=0
             #(flag, encodedImage) = cv2.imencode(".jpg", frame)
@@ -145,8 +145,9 @@ def video_feed():
 
 @app.route("/table")
 def table():
+    global criname
     #return redirect(url_for('static',filename='crim_found/crim1.jpg'))
-    imsr = "static/crim_found/crim1.jpg"
+    imsr = "static/crim_found/"+ criname +".jpg"
     return imsr
 
 @app.route("/sucess")
