@@ -24,6 +24,7 @@ outputFrame = None
 lock = threading.Lock()
 crim=None
 criname='none'
+cridict={}
 from flask import *
 from flask import Markup
 
@@ -37,7 +38,7 @@ def basic():
     return render_template("message.html")
 
 def rfa():
-    global video_capture, outputFrame, lock,crim,criname
+    global video_capture, outputFrame, lock,crim,criname,cridict
     
 
 # Load a sample picture and learn how to recognize it.
@@ -112,6 +113,10 @@ def rfa():
                     crim=frame.copy()
                     cv2.imwrite('static/crim_found/'+name+'.jpg', crim)
                     criname=name
+                    if name not in cridict:
+                        cridict[name]={}
+                    cridict[name]['img'] = 'static/crim_found/'+name+'.jpg'
+                    #crilist.append(name)
                 #count=0
             #(flag, encodedImage) = cv2.imencode(".jpg", frame)
     # Display the resulting image  
@@ -152,7 +157,7 @@ def table():
 
 @app.route("/sucess")
 def sucess():
-    global criname
+    global criname,cridict
     ag='-'
     sex='-'
     hei='-'
@@ -162,12 +167,12 @@ def sucess():
     if(criname!='none'):
         age=db.child(criname).get()
         age=age.val()
-        ag=list(age.values())[0]
-        sex=list(age.values())[4]
-        hei=list(age.values())[1]
-        noc=list(age.values())[3]
-        toc=list(age.values())[5]
-        fn=list(age.values())[2]
+        cridict[criname]['age']=ag=list(age.values())[0]
+        cridict[criname]['sex']=sex=list(age.values())[4]
+        cridict[criname]['hei']= hei=list(age.values())[1]
+        cridict[criname]['noc']=noc=list(age.values())[3]
+        cridict[criname]['toc']=toc=list(age.values())[5]
+        cridict[criname]['fn']=fn=list(age.values())[2]
     return render_template('sucess.html', ag=ag,cri=fn,se=sex,he=hei,noc=noc,toc=toc)
 
 @app.route('/login', methods=["POST", "GET"])
@@ -205,6 +210,11 @@ def forgot():
             passmsg=Markup('<div style="color: red;"> We couldn’t find an account with that e-mail, Try Again </div>')
            # print(e)
     return render_template("forgot.html",passmsg=passmsg)
+
+@app.route('/clist', methods=["POST", "GET"])
+def clist():
+    global cridict
+    return render_template("clist.html",cridict=cridict)
 
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()
