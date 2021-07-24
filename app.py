@@ -8,6 +8,7 @@ import pyrebase
 import time
 import argparse
 from kay import config
+from datetime import date, datetime
 
 firebase = pyrebase.initialize_app(config)
 
@@ -46,22 +47,48 @@ def rfa():
     ray_face_encoding = face_recognition.face_encodings(ray_image)[0]
 
 # Load a second sample picture and learn how to recognize it.
-    vin_image = face_recognition.load_image_file("images/vin.jfif")
-    vin_face_encoding = face_recognition.face_encodings(vin_image)[0]
+    alex_image = face_recognition.load_image_file("images/alex.jpg")
+    alex_face_encoding = face_recognition.face_encodings(alex_image)[0]
 
-    pun_image = face_recognition.load_image_file("images/pun.jpg")
-    pun_face_encoding = face_recognition.face_encodings(pun_image)[0]
+    aaron_image = face_recognition.load_image_file("images/aaron.jpg")
+    aaron_face_encoding = face_recognition.face_encodings(aaron_image)[0]
+
+    anna_image = face_recognition.load_image_file("images/anna.jpg")
+    anna_face_encoding = face_recognition.face_encodings(anna_image)[0]
+
+    benedict_image = face_recognition.load_image_file("images/benedict.jpg")
+    benedict_face_encoding = face_recognition.face_encodings(benedict_image)[0]
+
+    foxx_image = face_recognition.load_image_file("images/foxx.jpg")
+    foxx_face_encoding = face_recognition.face_encodings(foxx_image)[0]
+
+    hardy_image = face_recognition.load_image_file("images/hardy.jpg")
+    hardy_face_encoding = face_recognition.face_encodings(hardy_image)[0]
+
+    zac_image = face_recognition.load_image_file("images/zac.jpg")
+    zac_face_encoding = face_recognition.face_encodings(zac_image)[0]
+
 
 # Create arrays of known face encodings and their names
     known_face_encodings = [
         ray_face_encoding,
-        vin_face_encoding,
-        pun_face_encoding
+        alex_face_encoding,
+        aaron_face_encoding,
+        anna_face_encoding,
+        benedict_face_encoding,
+        foxx_face_encoding,
+        hardy_face_encoding,
+        zac_face_encoding
     ]
     known_face_names = [
         "Raymond",
-        "Vin",
-        "Punith"
+        "Alex",
+        "Aaron",
+        "Anna",
+        "Benedict",
+        "Foxx",
+        "Hardy",
+        "zac"
     
     ]
     count=0
@@ -112,6 +139,10 @@ def rfa():
                 if(count==1):
                     crim=frame.copy()
                     cv2.imwrite('static/crim_found/'+name+'.jpg', crim)
+                    dateTimeObj = datetime.now()
+                    dateStr = dateTimeObj.strftime("%d %b %Y ")
+                    timeStr = dateTimeObj.strftime("%I:%M %p")
+                    db.child(name).update({"Date": timeStr+", "+dateStr})
                     criname=name
                     if name not in cridict:
                         cridict[name]={}
@@ -162,18 +193,22 @@ def sucess():
     sex='-'
     hei='-'
     noc='-'
-    toc='-'
     fn='-'
+    da='-'
+    addre='-'
+    dan='-'
     if(criname!='none'):
         age=db.child(criname).get()
         age=age.val()
-        cridict[criname]['age']=ag=list(age.values())[0]
-        cridict[criname]['sex']=sex=list(age.values())[4]
-        cridict[criname]['hei']= hei=list(age.values())[1]
-        cridict[criname]['noc']=noc=list(age.values())[3]
-        cridict[criname]['toc']=toc=list(age.values())[5]
-        cridict[criname]['fn']=fn=list(age.values())[2]
-    return render_template('sucess.html', ag=ag,cri=fn,se=sex,he=hei,noc=noc,toc=toc)
+        cridict[criname]['address']=addre=list(age.values())[0]
+        cridict[criname]['age']=ag=list(age.values())[1]
+        cridict[criname]['danger']=dan=list(age.values())[2]
+        cridict[criname]['date']=da=list(age.values())[3]
+        cridict[criname]['hei']= hei=list(age.values())[4]
+        cridict[criname]['fn']=fn=list(age.values())[5]
+        cridict[criname]['noc']=noc=list(age.values())[6]
+        cridict[criname]['sex']=sex=list(age.values())[7] 
+    return render_template('sucess.html', ag=ag,cri=fn,se=sex,he=hei,noc=noc,da=da,addre=addre,dan=dan)
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
