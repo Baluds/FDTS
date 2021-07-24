@@ -249,7 +249,10 @@ def forgot():
 @app.route('/clist', methods=["POST", "GET"])
 def clist():
     global cridict
-    return render_template("clist.html",cridict=cridict)
+    msg=""
+    if not cridict:
+        msg="No Fugitive details found"
+    return render_template("clist.html",cridict=cridict,msg=msg)
 
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()
