@@ -5,6 +5,19 @@
         </title>
     </head>
     <body>
-        {{ for }}
+        {% for c_id,c_info in cridict.items() %}
+        <br>
+        <br>
+        <p>Name: {{ c_id }}</p>
+    
+        <img src= {{ c_info['img'] }} >
+       
+        <p> Age : {{ c_info['age'] }}</p>
+        <p> Sex : {{ c_info['sex'] }}</p>
+        <p> Height : {{ c_info['hei'] }}</p>
+        <p> Number of crimes : {{ c_info['noc'] }}</p>
+        <p> Types of crimes : {{ c_info['toc'] }}</p>
+      
+        {% endfor%}
     </body>
 </html>
