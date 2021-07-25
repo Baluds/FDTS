@@ -351,6 +351,14 @@ def table1():
     imsr = "static/crim_found/"+ obde +".jpg"
     return imsr
 
+@app.route('/glist', methods=["POST", "GET"])
+def glist():
+    global weapdict
+    msg=""
+    if not weapdict:
+        msg="No Weapons detected yet"
+    return render_template("glist.html",weapdict=weapdict,msg=msg)
+
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()
     app.run(debug=True,threaded=True,use_reloader=False)

@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>
+            Weapons list
+        </title>
+    </head>
+    <body>
+        <h1> {{ msg }} </h1>
+        {% for w_id,w_info in weapdict.items() %}
+        <br>
+        <br>
+        <p>Name: {{ w_id }}</p>
+    
+        <img src= {{ w_info['img'] }} >
+       
+        <p> Class : {{ w_info['class'] }}</p>
+        <p> Threat level : {{ w_info['danger'] }}</p>
+        <p> Date : {{ w_info['date'] }}</p>
+        <p> Location: {{ w_info['address'] }}</p>
+      
+        {% endfor%}
+    </body>
+</html>
