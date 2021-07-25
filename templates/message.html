@@ -39,8 +39,37 @@
         }
       });
   }
+
+  function ref1(){
+      $.ajax({
+        url: "/objectsucess",
+        type: "get",
+        success: function(response) {
+          $("#dataref1").html(response);
+        },
+        error: function(xhr) {
+          //Do Something to handle error
+        }
+      });
+  }
+
+  function imref1(){
+      $.ajax({
+        url: "/table1",
+        type: "GET",
+        success: function(response) {
+            $("#imgref1").attr('src', response + '?' + new Date().getTime());
+          //console.log(response);
+        },
+        error: function(xhr) {
+          //Do Something to handle error
+        }
+      });
+  }
       window.onload = setInterval("ref();",1000);
       window.onload = setInterval("imref();",5000);
+      window.onload = setInterval("ref1();",1000);
+      window.onload = setInterval("imref1();",5000);
       </script>
 
 </head> 
@@ -97,7 +126,7 @@
                         <div style="border: 0.5px solid #1B4965 ;border-radius: 27px;background-color: #1B4965 ;"class="card-body container">
                             <div style="border: 0.5px solid #ffffff;border-radius: 27px;height:180px;margin: 0px 15px 0px 15px;" class="card ">
                                 <div  style="border: 0.5px solid #e6d5d5;border-radius: 27px;height:400px;width: 255px; margin: 10px 10px 10px 10px; overflow:hidden;"class="card ">
-                                     <img id = "imgref" src="static/crim_found/crim1.jpg" height="100%" width="100%"/>
+                                     <img id = "imgref" src="static/crim_found/none.jpg" height="100%" width="100%"/>
                                 </div>
                             </div>
                         </div>
@@ -109,8 +138,34 @@
                                 <p class="card-text">Age:      &ensp;   &emsp;&emsp; &emsp;&emsp;&emsp;   -</p>
                                 <p class="card-text">Sex:      &nbsp; &nbsp;   &emsp;&emsp; &emsp;&emsp;&emsp;   -</p>
                                 <p class="card-text">Height:   &nbsp;   &emsp; &emsp;&emsp;&emsp;   - </p>
-                                <p class="card-text">Danger level: &ensp; &nbsp; &emsp;  - </p>
+                                <p class="card-text">Threat level: &ensp; &nbsp; &emsp;  - </p>
                                 <p class="card-text">No of crimes: &ensp; &nbsp; &emsp;  - </p>
+                                <p class="card-text">Date and time: &ensp; &emsp;  - </p>
+                                <p class="card-text">Location: &nbsp; &emsp; &emsp;&ensp;&ensp; &nbsp;  - </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div style="margin-right: 120px;">
+                    <div style="border-radius: 27px;background-color: #1B4965;width: 350px; margin: 10px 10px 15px 10px;" class="card ">
+                        <div style="border: 0.5px solid #1B4965 ;border-radius: 27px;background-color: #1B4965 ;"class="card-body container">
+                            <div style="border: 0.5px solid #ffffff;border-radius: 27px;height:180px;margin: 0px 15px 0px 15px;" class="card ">
+                                <div  style="border: 0.5px solid #e6d5d5;border-radius: 27px;height:400px;width: 255px; margin: 10px 10px 10px 10px; overflow:hidden;"class="card ">
+                                     <img id = "imgref1" src="static/crim_found/none.jpg" height="100%" width="100%"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border-radius: 27px;background-color: #1B4965;" class="card">
+                        <div style="border: 0.5px solid #1B4965 ;border-radius: 27px;background-color: #1B4965;"class="card-body container" id = "dataref1" >
+                            <h5 style="color: whitesmoke; text-align: center;" class="card-title">Weapon Details</h5>
+                                <p class="card-text">Weapon:     &ensp;  &emsp;  &emsp;&emsp;&emsp;   -</p>
+                                <p class="card-text">Class:      &ensp;   &emsp;&emsp; &emsp;&emsp;&emsp;   -</p>
+                                <p class="card-text">Threat level: &ensp; &nbsp; &emsp;  - </p>
                                 <p class="card-text">Date and time: &ensp; &emsp;  - </p>
                                 <p class="card-text">Location: &nbsp; &emsp; &emsp;&ensp;&ensp; &nbsp;  - </p>
                         </div>

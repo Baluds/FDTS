@@ -25,7 +25,9 @@ outputFrame = None
 lock = threading.Lock()
 crim=None
 criname='none'
+obde='none'
 cridict={}
+weapdict={}
 from flask import *
 from flask import Markup
 
@@ -76,22 +78,8 @@ def get_box_dimensions(outputs, height, width):
 				class_ids.append(class_id)
 	return boxes, confs, class_ids
 
-def draw_labels(boxes, confs, colors, class_ids, classes, img): 
-	indexes = cv2.dnn.NMSBoxes(boxes, confs, 0.5, 0.4)
-	font = cv2.FONT_HERSHEY_PLAIN
-	for i in range(len(boxes)):
-		if i in indexes:
-			x, y, w, h = boxes[i]
-			label = str(classes[class_ids[i]])
-			color = colors[i]
-			cv2.rectangle(img, (x,y), (x+w, y+h), color, 2)
-			cv2.putText(img, label, (x, y - 5), font, 1, color, 1)
-	img=cv2.resize(img, (800,600))
-	cv2.imshow("Image", img)
-
-
 def rfa():
-    global video_capture, outputFrame, lock,crim,criname,cridict
+    global video_capture, outputFrame, lock,crim,criname,cridict,obde
     
 
 # Load a sample picture and learn how to recognize it.
@@ -213,6 +201,20 @@ def rfa():
             if i in indexes:
                 x, y, w, h = boxes[i]
                 label = str(classes[class_ids[i]])
+                #print(label)
+                obde=label
+                with lock:
+                    if obde=='Gun' or obde =='Rifle':
+                        weap=frame.copy()
+                        cv2.imwrite('static/crim_found/'+obde+'.jpg', weap)
+                        dateTimeObj = datetime.now()
+                        dateStr = dateTimeObj.strftime("%d %b %Y ")
+                        timeStr = dateTimeObj.strftime("%I:%M %p")
+                        db.child(obde).update({"Date": timeStr+", "+dateStr})
+                        if obde not in weapdict:
+                            weapdict[obde]={}
+                        weapdict[obde]['img'] = 'static/crim_found/'+obde+'.jpg'
+
                 try:
                     color = colors[i]
                 except:
@@ -323,6 +325,31 @@ def clist():
     if not cridict:
         msg="No Fugitive details found"
     return render_template("clist.html",cridict=cridict,msg=msg)
+
+@app.route("/objectsucess")
+def objectsucess():
+    global obde,weapdict
+    wea='-'
+    cla='-'
+    dan='-'
+    dat='-'
+    addre='-'
+    if((obde!='none') and (obde!='Fire') ):
+        headi=db.child(obde).get()
+        headi=headi.val()
+        weapdict[obde]['address']=addre=list(headi.values())[0]
+        weapdict[obde]['class']=cla=list(headi.values())[1]
+        weapdict[obde]['danger']=dan=list(headi.values())[2]
+        weapdict[obde]['date']=dat=list(headi.values())[3]
+        weapdict[obde]['weapon']= wea=list(headi.values())[4] 
+    return render_template('objectsucess.html', addre=addre,cla=cla,dat=dat,wea=wea,dan=dan)
+
+@app.route("/table1")
+def table1():
+    global obde
+    #return redirect(url_for('static',filename='crim_found/crim1.jpg'))
+    imsr = "static/crim_found/"+ obde +".jpg"
+    return imsr
 
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()
