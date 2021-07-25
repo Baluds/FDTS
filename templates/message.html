@@ -100,6 +100,11 @@
             margin-top: 0px !important;
             margin-bottom: 0px !important;
         }
+        #dataref1
+        {
+            margin-top: 0px !important;
+            margin-bottom: 10px !important;
+        }
         </style>
  
     <body style="background-color:#62b6cb ;background-image: url('static/Rectangle1.png');background-size: cover;">
@@ -115,13 +120,13 @@
             </div>
             <div style="display:flex;flex-direction:row; justify-content: space-evenly;align-items: center;">
                 <div>
-                    <div style="height: 500px;width: 500px;background-color: rgba(0, 0, 0, 0.171);border-radius: 20px; overflow:hidden; margin-left: 120px; position: relative;">
+                    <div style="height: 500px;width: 500px;background-color: rgba(0, 0, 0, 0.171);border-radius: 20px; overflow:hidden; position: relative;">
                         <p style="color: #1B4965; opacity: 0.8; font-size: 18px; font-weight: 500;  margin: 0px !important; padding-left: calc(50% - 61px) !important; padding-top: 5px; position: absolute;">Trafficcamera-1</p>
                         <img src="{{ url_for('video_feed') }}" height="100%" width="100%">
                     </div>
                 </div>
 
-                <div style="margin-right: 120px;">
+                <div >
                     <div style="border-radius: 27px;background-color: #1B4965;width: 350px; margin: 10px 10px 15px 10px;" class="card ">
                         <div style="border: 0.5px solid #1B4965 ;border-radius: 27px;background-color: #1B4965 ;"class="card-body container">
                             <div style="border: 0.5px solid #ffffff;border-radius: 27px;height:180px;margin: 0px 15px 0px 15px;" class="card ">
@@ -138,7 +143,7 @@
                                 <p class="card-text">Age:      &ensp;   &emsp;&emsp; &emsp;&emsp;&emsp;   -</p>
                                 <p class="card-text">Sex:      &nbsp; &nbsp;   &emsp;&emsp; &emsp;&emsp;&emsp;   -</p>
                                 <p class="card-text">Height:   &nbsp;   &emsp; &emsp;&emsp;&emsp;   - </p>
-                                <p class="card-text">Threat level: &ensp; &nbsp; &emsp;  - </p>
+                                <p class="card-text">Threat level: &ensp; &nbsp; &nbsp; &emsp;  - </p>
                                 <p class="card-text">No of crimes: &ensp; &nbsp; &emsp;  - </p>
                                 <p class="card-text">Date and time: &ensp; &emsp;  - </p>
                                 <p class="card-text">Location: &nbsp; &emsp; &emsp;&ensp;&ensp; &nbsp;  - </p>
@@ -150,7 +155,7 @@
 
 
 
-                <div style="margin-right: 120px;">
+                <div>
                     <div style="border-radius: 27px;background-color: #1B4965;width: 350px; margin: 10px 10px 15px 10px;" class="card ">
                         <div style="border: 0.5px solid #1B4965 ;border-radius: 27px;background-color: #1B4965 ;"class="card-body container">
                             <div style="border: 0.5px solid #ffffff;border-radius: 27px;height:180px;margin: 0px 15px 0px 15px;" class="card ">
@@ -160,14 +165,14 @@
                             </div>
                         </div>
                     </div>
-                    <div style="border-radius: 27px;background-color: #1B4965;" class="card">
+                    <div style="border-radius: 27px;background-color: #1B4965;height: 321.6px; " class="card">
                         <div style="border: 0.5px solid #1B4965 ;border-radius: 27px;background-color: #1B4965;"class="card-body container" id = "dataref1" >
-                            <h5 style="color: whitesmoke; text-align: center;" class="card-title">Weapon Details</h5>
+                            <h5 style="color: whitesmoke; text-align: center; padding-bottom: 20px;" class="card-title">Weapon Details</h5>
                                 <p class="card-text">Weapon:     &ensp;  &emsp;  &emsp;&emsp;&emsp;   -</p>
-                                <p class="card-text">Class:      &ensp;   &emsp;&emsp; &emsp;&emsp;&emsp;   -</p>
-                                <p class="card-text">Threat level: &ensp; &nbsp; &emsp;  - </p>
-                                <p class="card-text">Date and time: &ensp; &emsp;  - </p>
-                                <p class="card-text">Location: &nbsp; &emsp; &emsp;&ensp;&ensp; &nbsp;  - </p>
+                                <p class="card-text">Class:      &nbsp;  &ensp;   &emsp;&emsp; &emsp;&emsp;&emsp;   -</p>
+                                <p class="card-text">Threat level: &ensp; &nbsp; &emsp; &emsp;  - </p>
+                                <p class="card-text">Date and time:  &nbsp; &emsp; &nbsp;  &nbsp; - </p>
+                                <p class="card-text">Location: &nbsp; &emsp; &ensp; &emsp;&ensp;&ensp; &nbsp;   - </p>
                         </div>
                     </div>
                 </div>
