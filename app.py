@@ -323,7 +323,7 @@ def clist():
     global cridict
     msg=""
     if not cridict:
-        msg="No Fugitive details found"
+        msg="No Fugitives recognised yet"
     return render_template("clist.html",cridict=cridict,msg=msg)
 
 @app.route("/objectsucess")
@@ -356,7 +356,7 @@ def glist():
     global weapdict
     msg=""
     if not weapdict:
-        msg="No Weapons detected yet"
+        msg="No Weapons recognised yet"
     return render_template("glist.html",weapdict=weapdict,msg=msg)
 
 if __name__ == '__main__':
