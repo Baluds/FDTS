@@ -1,26 +1,100 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title>
-            criminals list
-        </title>
-    </head>
-    <body>
-        <h1> {{ msg }} </h1>
-        {% for c_id,c_info in cridict.items() %}
-        <br>
-        <br>
-        <p>Name: {{ c_id }}</p>
-    
-        <img src= {{ c_info['img'] }} >
-       
-        <p> Age : {{ c_info['age'] }}</p>
-        <p> Sex : {{ c_info['sex'] }}</p>
-        <p> Height : {{ c_info['hei'] }}</p>
-        <p> Danger level: {{ c_info['danger'] }}</p>
-        <p> Number of crimes : {{ c_info['noc'] }}</p>
-        <p> Date and time : {{ c_info['date'] }}</p>
-        <p> Location : {{ c_info['address'] }}</p>
-      
-        {% endfor%}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"> 
+        <title> Fugitive list</title>
+    <link href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"> </script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head> 
+    <title></title>
+    <style>
+
+        .container{
+        
+        border-radius: 30px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        }
+        p{
+            color: whitesmoke;
+        }
+        .stt a:hover{
+            color: #1B4965 !important;
+        }
+        p.card-text{
+            margin-top: 8px !important;
+            margin-bottom: 0px !important;
+        }
+        h5.card-title
+        {
+            margin-bottom: 7px !important;
+        }
+        #dataref {
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+        #dataref1
+        {
+            margin-top: 0px !important;
+            margin-bottom: 10px !important;
+        }
+        </style>
+ 
+    <body style="background-color:#62b6cb ;background-image: url('static/Rectangle1.png');background-size: cover;">
+        <div style="height: 100vh; background-image: url('static/Rectangle.png');background-repeat: no-repeat;background-size: cover;background-position-x: 790px;">
+            <div style="display:flex;flex-direction:row;justify-content: space-between">
+            <h4 style="padding: 1.3%;  color: #1B4965;">Fugitive Detection traffic System</h4>
+            <div style="display:flex;flex-direction:row;padding:2%;">
+                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/">Home</a></h5>
+                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/glist">Weapons found</a></h5>
+                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/logout">Logout</a></h5>
+            </div>
+            </div>
+            <h2 style="text-align: center; color: #1B4965;">Fugitives found</h2>
+            <br>
+            <br>
+            <h1 style="text-align: center;"> {{ msg }} </h1>
+            <div style="display: grid; grid-template-columns: auto auto;">
+            {% for c_id,c_info in cridict.items() %}
+            <div style="display:flex;flex-direction:row; justify-content: center ;align-items: center;">
+                <div style="border-bottom-left-radius: 27px; border-top-left-radius: 27px ; background-color: #1B4965;width: 340px; height: 330px; margin: 10px 10px 10px 10px;" class="card ">
+                    <div style="border: 0.5px solid #1B4965 ;border-radius: 27px;background-color: #1B4965 ;display: flex; justify-content: center; align-items: center;vertical-align: middle;"class="card-body container">
+                        <div style="border: 0.5px solid #ffffff;border-radius: 27px;height:180px;margin: 0px 15px 0px 15px; " class="card ">
+                            <div  style="border: 0.5px solid #e6d5d5;border-radius: 27px;height:400px;width: 240px; margin: 10px 10px 10px 10px; overflow:hidden; "class="card ">
+                                 <img id = "imgref" src={{ c_info['img'] }} height="100%" width="100%"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="border-bottom-right-radius: 27px; border-top-right-radius: 27px ;  background-color: #1B4965;width: 370px; height: 330px;" class="card">
+                    <div style="border: 0.5px solid #1B4965 ;border-radius: 27px;background-color: #1B4965;"class="card-body container" id = "dataref" >
+                        <h5 style="color: whitesmoke; text-align: center;" class="card-title">Fugitive Details</h5>
+                            <p class="card-text">Name:     &ensp;  &emsp;  &emsp;&emsp;&emsp;   {{ c_id }}</p>
+                            <p class="card-text">Age:      &ensp;   &emsp;&emsp; &emsp;&emsp;&emsp;   {{ c_info['age'] }}</p>
+                            <p class="card-text">Sex:      &nbsp; &nbsp;   &emsp;&emsp; &emsp;&emsp;&emsp;   {{ c_info['sex'] }}</p>
+                            <p class="card-text">Height:   &nbsp;   &emsp; &emsp;&emsp;&emsp;   {{ c_info['hei'] }} </p>
+                            <p class="card-text">Threat level: &ensp; &nbsp; &nbsp; &emsp;  {{ c_info['danger'] }} </p>
+                            <p class="card-text">No of crimes: &ensp; &nbsp; &emsp;  {{ c_info['noc'] }} </p>
+                            <p class="card-text">Date and time: &ensp; &emsp;  {{ c_info['date'] }} </p>
+                            <p class="card-text">Location: &nbsp; &emsp; &emsp;&ensp;&ensp; &nbsp;  {{ c_info['address'] }} </p>
+                    </div>
+                </div>
+                </div>
+          
+            {% endfor%}
+
+        </div>
+
+            
+            
+        </div>
     </body>
 </html>
+

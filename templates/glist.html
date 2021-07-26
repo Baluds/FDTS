@@ -1,12 +1,67 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title>
-            Weapons list
-        </title>
-    </head>
-    <body>
-        <h1> {{ msg }} </h1>
-        {% for w_id,w_info in weapdict.items() %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"> 
+        <title> Weapons list</title>
+    <link href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"> </script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head> 
+    <title></title>
+    <style>
+
+        .container{
+        
+        border-radius: 30px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        }
+        p{
+            color: whitesmoke;
+        }
+        .stt a:hover{
+            color: #1B4965 !important;
+        }
+        p.card-text{
+            margin-top: 8px !important;
+            margin-bottom: 0px !important;
+        }
+        h5.card-title
+        {
+            margin-bottom: 7px !important;
+        }
+        #dataref {
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+        #dataref1
+        {
+            margin-top: 0px !important;
+            margin-bottom: 10px !important;
+        }
+        </style>
+ 
+    <body style="background-color:#62b6cb ;background-image: url('static/Rectangle1.png');background-size: cover;">
+        <div style="height: 100vh; background-image: url('static/Rectangle.png');background-repeat: no-repeat;background-size: cover;background-position-x: 790px;">
+            <div style="display:flex;flex-direction:row;justify-content: space-between">
+            <h4 style="padding: 1.3%;  color: #1B4965;">Fugitive Detection traffic System</h4>
+            <div style="display:flex;flex-direction:row;padding:2%;">
+                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/">Home</a></h5>
+                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/clist">Fugitives found</a></h5>
+                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/logout">Logout</a></h5>
+            </div>
+            </div>
+            <h2 style="text-align: center; color: #1B4965;">Weapons found</h2>
+            <br>
+            <br>
+            <h1 style="text-align: center;"> {{ msg }} </h1>
+            {% for w_id,w_info in weapdict.items() %}
         <br>
         <br>
         <p>Name: {{ w_id }}</p>
@@ -19,5 +74,7 @@
         <p> Location: {{ w_info['address'] }}</p>
       
         {% endfor%}
+            
+        </div>
     </body>
 </html>
