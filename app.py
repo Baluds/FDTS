@@ -128,7 +128,7 @@ def rfa():
         "Benedict",
         "Foxx",
         "Hardy",
-        "zac"
+        "Zac"
     
     ]
     count=0
@@ -202,9 +202,9 @@ def rfa():
                 x, y, w, h = boxes[i]
                 label = str(classes[class_ids[i]])
                 #print(label)
-                obde=label
                 with lock:
-                    if obde=='Gun' or obde =='Rifle':
+                    if label=='Gun' or label =='Rifle':
+                        obde=label
                         weap=frame.copy()
                         cv2.imwrite('static/crim_found/'+obde+'.jpg', weap)
                         dateTimeObj = datetime.now()

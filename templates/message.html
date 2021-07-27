@@ -66,10 +66,30 @@
         }
       });
   }
-      window.onload = setInterval("ref();",1000);
-      window.onload = setInterval("imref();",5000);
-      window.onload = setInterval("ref1();",1000);
-      window.onload = setInterval("imref1();",5000);
+    window.onload = setInterval("ref();",1000);
+    window.onload = setInterval("imref();",5000);
+    window.onload = setInterval("ref1();",1000);
+    window.onload = setInterval("imref1();",5000);
+
+    var synth = window.speechSynthesis;
+    var voices = [];
+ 
+
+function over(xy){
+    synth.cancel(); //for only once
+    var toSpeak = new SpeechSynthesisUtterance(xy);
+    voices = synth.getVoices();
+    toSpeak.voice=voices[4];
+    toSpeak.lang = 'es';
+    toSpeak.rate=0.8;
+     synth.speak(toSpeak);
+        };
+
+function out(){
+    synth.cancel();
+        };
+ 
+
       </script>
 
 </head> 
@@ -108,14 +128,13 @@
         </style>
  
     <body style="background-color:#62b6cb ;background-image: url('static/Rectangle1.png');background-size: cover;">
-        <div style="height: 100vh; background-image: url('static/Rectangle.png');background-repeat: no-repeat;background-size: cover;background-position-x: 715px;">
+        <div style="height: 100vh; background-image: url('static/Rectangle.png');background-repeat: no-repeat;background-size: cover;background-position-x: 670px;">
             <div style="display:flex;flex-direction:row;justify-content: space-between">
             <h4 style="padding: 1.3%; font-weight: 700; font-size: 30px; color: #1B4965;">Fugitive Detection traffic System</h4>
             <div style="display:flex;flex-direction:row;padding:2%;">
                 <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/clist">Fugitives found</a></h5>
                 <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/glist">Weapons found</a></h5>
-                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="#">Contact</a> </h5>
-                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="#">About Us </a></h5>
+                <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="" onclick="over('An application with a goal to alert the law enforcement when a traffic camera captures a fugitive or a weapon in public')">About Us </a></h5>
                 <h5 style="margin-left: 30px;margin-right: 27px;font-family: 'Ubuntu', sans-serif;color: white;cursor: pointer;font-size: medium; font-weight: 700;" class="stt"><a style="text-decoration: none;color: white;" href="/logout">Logout</a></h5>
             </div>
             </div>
@@ -177,9 +196,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div style="height: 200px; background-color: #1B4965;margin-top: 100px;">
-
             </div>
         </div>
     </body>
