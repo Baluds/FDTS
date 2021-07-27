@@ -359,6 +359,13 @@ def glist():
         msg="No Weapons recognised yet"
     return render_template("glist.html",weapdict=weapdict,msg=msg)
 
+@app.route('/reset', methods=["POST", "GET"])
+def reset():
+    global criname,obde
+    criname='none'
+    obde='none'
+    return redirect(url_for('basic'))
+
 if __name__ == '__main__':
     threading.Thread(target=rfa,daemon = True).start()
     app.run(debug=True,threaded=True,use_reloader=False)

@@ -125,6 +125,31 @@ function out(){
             margin-top: 0px !important;
             margin-bottom: 10px !important;
         }
+        button{
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.415);
+            border-radius: 50px;
+            width: 170px;
+            font-size: 20px;
+            color: white;
+            background-color: #62B6CB;
+            border:none;
+            height: 50px;
+        }
+        button:focus
+        {
+            outline: none;
+
+        }
+        button:active{
+            color: #62B6CB;
+            background-color: #235d81;
+        }
+        .cli:hover{
+            background-color: #6dc9e0;
+        }
         </style>
  
     <body style="background-color:#62b6cb ;background-image: url('static/Rectangle1.png');background-size: cover;">
@@ -193,6 +218,7 @@ function out(){
                                 <p class="card-text">Threat level: &ensp; &nbsp; &emsp; &emsp;  - </p>
                                 <p class="card-text">Date and time:  &nbsp; &emsp; &nbsp;  &nbsp; - </p>
                                 <p class="card-text">Location: &nbsp; &emsp; &ensp; &emsp;&ensp;&ensp; &nbsp;   - </p>
+                                <p style="justify-content: center; display: flex;"  ><a href="/reset" style="text-decoration: none; color:#62B6CB;"><button onclick="" class="cli">Reset</button></a></p>
                         </div>
                     </div>
                 </div>
