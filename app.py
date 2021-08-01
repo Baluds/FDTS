@@ -6,20 +6,13 @@ import numpy as np
 import threading
 import pyrebase
 import time
-import argparse
 from kay import config
-from datetime import date, datetime
+from datetime import datetime
 
 firebase = pyrebase.initialize_app(config)
 
 db = firebase.database()
 auth = firebase.auth()
-
-#db.child("criminals").child("crime").push({"name":"Ray"})
-#db.child("Raymond").update({"Age": "49"})
-#age= db.child("Raymond").get()
-#va=age.val()
-#print(list(va.values())[0])
 
 outputFrame = None
 lock = threading.Lock()
@@ -81,12 +74,9 @@ def get_box_dimensions(outputs, height, width):
 def rfa():
     global video_capture, outputFrame, lock,crim,criname,cridict,obde
     
-
-# Load a sample picture and learn how to recognize it.
     ray_image = face_recognition.load_image_file("images/ray.jfif")
     ray_face_encoding = face_recognition.face_encodings(ray_image)[0]
 
-# Load a second sample picture and learn how to recognize it.
     alex_image = face_recognition.load_image_file("images/alex.jpg")
     alex_face_encoding = face_recognition.face_encodings(alex_image)[0]
 
@@ -108,8 +98,6 @@ def rfa():
     zac_image = face_recognition.load_image_file("images/zac.jpg")
     zac_face_encoding = face_recognition.face_encodings(zac_image)[0]
 
-
-# Create arrays of known face encodings and their names
     known_face_encodings = [
         ray_face_encoding,
         alex_face_encoding,
@@ -134,45 +122,26 @@ def rfa():
     count=0
     model, classes, colors, output_layers = load_yolo()
     while True:
-    # Grab a single frame of video
         ret, frame = video_capture.read()
 
-    # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
         rgb_frame = frame[:, :, ::-1]
 
-    # Find all the faces and face enqcodings in the frame of video
         face_locations = face_recognition.face_locations(rgb_frame)
         face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
         name = ''
-    # Loop through each face in this frame of video
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
-        # See if the face is a match for the known face(s)
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
 
             name = "Unknown"
-
-        # If a match was found in known_face_encodings, just use the first one.
-        # if True in matches:
-        #     first_match_index = matches.index(True)
-        #     name = known_face_names[first_match_index]
-
-        # Or instead, use the known face with the smallest distance to the new face
             face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
             best_match_index = np.argmin(face_distances)
             if matches[best_match_index]:
                 count=1
                 name = known_face_names[best_match_index]
-                #if(count==1):
-                 #   from app import bcall
-                  #  bcall(name)
             else:
                 count=0
-       # break
-            #print(name)
-        # Draw a box around the face
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
-        # Draw a label with a name below the face
             cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
@@ -188,10 +157,7 @@ def rfa():
                     if name not in cridict:
                         cridict[name]={}
                     cridict[name]['img'] = 'static/crim_found/'+name+'.jpg'
-                    #crilist.append(name)
-                #count=0
-            #(flag, encodedImage) = cv2.imencode(".jpg", frame)
-        # Display the resulting image
+
         height, width, channels = frame.shape
         blob, outputs = detect_objects(frame, model, output_layers)
         boxes, confs, class_ids = get_box_dimensions(outputs, height, width)
@@ -201,7 +167,6 @@ def rfa():
             if i in indexes:
                 x, y, w, h = boxes[i]
                 label = str(classes[class_ids[i]])
-                #print(label)
                 with lock:
                     if label=='Gun' or label =='Rifle':
                         obde=label
@@ -221,8 +186,6 @@ def rfa():
                     print("error occurred")
                 cv2.rectangle(frame, (x,y), (x+w, y+h), color, 2)
                 cv2.putText(frame, label, (x, y - 5), font, 1, color, 1)
-	    #img=cv2.resize(frame, (800,600))
-	    #cv2.imshow("Image", frame) 
         with lock:
             outputFrame = frame.copy()
 
@@ -237,24 +200,16 @@ def generate():
 				continue
 		yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + 
 			bytearray(encodedImage) + b'\r\n')
-
-#def crimgen():
- #   while True:
         
 
 @app.route("/video_feed")
 def video_feed():
     return Response(generate(),
-		mimetype = "multipart/x-mixed-replace; boundary=frame")
-	# return the response generated along with the specific media
-	# type (mime type)
-#def bcall(uname):
-#    return render_template('message.html',name=uname)  
+		mimetype = "multipart/x-mixed-replace; boundary=frame") 
 
 @app.route("/table")
 def table():
     global criname
-    #return redirect(url_for('static',filename='crim_found/crim1.jpg'))
     imsr = "static/crim_found/"+ criname +".jpg"
     return imsr
 
@@ -315,7 +270,6 @@ def forgot():
             passmsg=Markup('<div style="color: #008140;"> Password reset link has been sent </div>')  
         except Exception as e:
             passmsg=Markup('<div style="color: red;"> We couldn’t find an account with that e-mail, Try Again </div>')
-           # print(e)
     return render_template("forgot.html",passmsg=passmsg)
 
 @app.route('/clist', methods=["POST", "GET"])
@@ -347,7 +301,6 @@ def objectsucess():
 @app.route("/table1")
 def table1():
     global obde
-    #return redirect(url_for('static',filename='crim_found/crim1.jpg'))
     imsr = "static/crim_found/"+ obde +".jpg"
     return imsr
 
