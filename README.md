@@ -7,3 +7,4 @@ An application with a goal to alert the law enforcement when a traffic camera ca
 a weapon in public. This application uses Convolution neural networks to detect a fugitive face by cross
 referring it with a law enforcement database, once a match is found law enforcement will be alerted on their
 web or mobile app. This application will also detect weapons and flag them as threat and let the law enforcement know as soon as possible
+This application uses Flask and Firebase
